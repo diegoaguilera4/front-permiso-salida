@@ -1,149 +1,84 @@
 <template>
-  <v-container>
-    <v-row class="text-center">
-      <v-col cols="12">
-        <v-img
-          :src="require('../assets/logo.svg')"
-          class="my-3"
-          contain
-          height="200"
-        />
-      </v-col>
-
-      <v-col class="mb-4">
-        <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to the Vuetify 3 Beta
-        </h1>
-
-
-        <p class="subheading font-weight-regular">
-          For help and collaboration with other Vuetify developers,
-          <br>please join our online
-          <a
-            href="https://community.vuetifyjs.com"
-            target="_blank"
-          >Discord Community</a>
-        </p>
-      </v-col>
-
-      <v-col
-        class="mb-5"
-        cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-5">
-          What's next?
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(next, i) in whatsNext"
-            :key="i"
-            :href="next.href"
-            class="subheading mx-3"
-            target="_blank"
+  <v-sheet width="1000" class="mx-auto mt-11">
+    <v-form fast-fail @submit.prevent>
+      <v-row justify="center">
+        <v-card class="card-grande">
+          <v-card-title
+            class="text-h6 text-md-h5 text-lg-h4 text-center"
+            style="
+              background-color: rgb(0, 0, 181);
+              color: #ffffff;
+              border-radius: 20px;
+              margin-bottom: 30px;
+            "
           >
-            {{ next.text }}
-          </a>
-        </v-row>
-      </v-col>
-
-      <v-col
-        class="mb-5"
-        cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-5">
-          Important Links
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(link, i) in importantLinks"
-            :key="i"
-            :href="link.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ link.text }}
-          </a>
-        </v-row>
-      </v-col>
-
-      <v-col
-        class="mb-5"
-        cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-5">
-          Ecosystem
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(eco, i) in ecosystem"
-            :key="i"
-            :href="eco.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ eco.text }}
-          </a>
-        </v-row>
-      </v-col>
-    </v-row>
-  </v-container>
+            Autorización permiso de salida
+          </v-card-title>
+          <v-row justify="center">
+            <p>Yo {{ persona.nombre }} con rut: {{ persona.rut }}</p>
+          </v-row>
+          <v-row justify="center"
+            ><p>Solicito autorización para retirarme el día</p>
+            </v-row>
+          <v-row>
+          </v-row>
+          <v-row justify="center">
+            <p>Por el siguiente motivo</p>
+          </v-row>
+          <v-row justify="center">
+            <v-textarea
+              v-model="motivo"
+              label="motivo"
+              variant="outlined"
+              dense
+              rows="1"
+              max-rows="4"
+            >
+            </v-textarea>
+          </v-row>
+          <v-card-actions class="justify-center">
+            <v-btn
+              variant="tonal"
+              color="blue darken-1"
+              text
+              append-icon="mdi-check-circle-outline"
+              >Solicitar permiso de salida</v-btn
+            >
+          </v-card-actions>
+        </v-card>
+      </v-row>
+    </v-form>
+  </v-sheet>
 </template>
 
 <script>
-
 export default {
-  name: 'HelloWorld',
-
   data: () => ({
-    ecosystem: [
-      {
-        text: 'vuetify-loader',
-        href: 'https://github.com/vuetifyjs/vuetify-loader/tree/next',
-      },
-      {
-        text: 'github',
-        href: 'https://github.com/vuetifyjs/vuetify/tree/next',
-      },
-      {
-        text: 'awesome-vuetify',
-        href: 'https://github.com/vuetifyjs/awesome-vuetify',
-      },
-    ],
-    importantLinks: [
-      {
-        text: 'Chat',
-        href: 'https://community.vuetifyjs.com',
-      },
-      {
-        text: 'Made with Vuetify',
-        href: 'https://madewithvuejs.com/vuetify',
-      },
-      {
-        text: 'Twitter',
-        href: 'https://twitter.com/vuetifyjs',
-      },
-      {
-        text: 'Articles',
-        href: 'https://medium.com/vuetify',
-      },
-    ],
-    whatsNext: [
-      {
-        text: 'Explore components',
-        href: 'https://vuetifyjs.com',
-      },
-      {
-        text: 'Roadmap',
-        href: 'https://vuetifyjs.com/introduction/roadmap/',
-      },
-      {
-        text: 'Frequently Asked Questions',
-        href: 'https://vuetifyjs.com/getting-started/frequently-asked-questions',
-      },
-    ],
+    motivo: "",
+    persona:{
+      nombre: "Juan Perez",
+      rut: "12345678-9"
+    }
   }),
-}
+};
 </script>
+
+<style scoped>
+.card-grande {
+  width: 65%;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.35);
+}
+
+.card-orden {
+  border: none;
+  box-shadow: none;
+  padding: 10px;
+}
+
+.subtitulos {
+  margin-bottom: -13px;
+  text-align: center;
+}
+</style>
