@@ -37,8 +37,11 @@ export default {
     dialog: false,
     registros: [],
     headers: [
-      { title: "id", key: "_id" },
-      { title: "Persona", key: "persona" },
+      { title: "Nombre", key: "nombre" },
+      { title: "Rut", key: "rut" },
+      { title: "Centro de costo", key: "d_cencos" },
+      { title: "Cargo", key: "d_cargo" },
+      { title: "Fecha", key: "fechaHora" },
       { title: "Tipo", key: "tipo" },
     ]
   }),

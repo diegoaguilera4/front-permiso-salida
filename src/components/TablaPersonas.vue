@@ -19,11 +19,17 @@
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="500px">
           <template v-slot:activator="{ props }">
-            <v-btn color="primary" variant="tonal" dark class="mb-2" v-bind="props">
+            <v-btn
+              color="primary"
+              variant="tonal"
+              dark
+              class="mb-2"
+              v-bind="props"
+            >
               Nueva persona
             </v-btn>
           </template>
-          <v-card>
+          <v-card class="text-center" style="border-radius: 20px; padding: 15px ">
             <v-card-title>
               <span class="text-h5">{{ formTitle }}</span>
             </v-card-title>
@@ -61,31 +67,36 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue-darken-1" variant="tonal" @click="save">
-                Guardar 
+              <v-btn color="green-darken-1" variant="tonal" @click="save">
+                Guardar
               </v-btn>
-              <v-btn color="blue-darken-1" variant="tonal" @click="close">
+              <v-btn color="red-darken-1" variant="tonal" @click="close">
                 Cancelar
               </v-btn>
-              
             </v-card-actions>
           </v-card>
         </v-dialog>
-        <v-dialog v-model="dialogDelete" max-width="500px">
-          <v-card>
+        <v-dialog v-model="dialogDelete" max-width="600px">
+          <v-card class="text-center" style="border-radius: 20px; padding: 15px ">
             <v-card-title class="text-h5"
-              >Are you sure you want to delete this item?</v-card-title
+              >¿Estás seguro que deseas eliminar esta persona?</v-card-title
             >
+            <v-row>
+              <v-card-text>
+                {{ editedItem.nombre }}
+              </v-card-text>
+            </v-row>
+
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn color="blue-darken-1" variant="tonal" @click="closeDelete"
                 >Cancelar</v-btn
               >
               <v-btn
-                color="blue-darken-1"
+                color="red-darken-1"
                 variant="tonal"
                 @click="deleteItemConfirm"
-                >OK</v-btn
+                >Eliminar</v-btn
               >
               <v-spacer></v-spacer>
             </v-card-actions>
@@ -99,7 +110,7 @@
       </v-icon>
       <v-icon size="small" @click="deleteItem(item)"> mdi-delete </v-icon>
     </template>
-    <template v-slot:no-data> 
+    <template v-slot:no-data>
       <p>No existen resultados</p>
     </template>
   </v-data-table>
