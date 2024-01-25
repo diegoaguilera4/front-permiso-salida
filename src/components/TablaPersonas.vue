@@ -24,6 +24,7 @@
               dark
               class="mb-2"
               v-bind="props"
+              append-icon="mdi-account-multiple-plus"
             >
               Nueva persona
             </v-btn>
