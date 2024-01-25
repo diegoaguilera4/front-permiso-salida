@@ -2,20 +2,20 @@
   <v-app>
     <AppDrawer />
     <v-main>
-        <RegistroPorteria />
+        <TablaPersonas />
     </v-main>
   </v-app>
 </template>
 
 <script>
 import AppDrawer from "../components/AppDrawer.vue";
-import RegistroPorteria from "../components/RegistrosPorteria.vue";
+import TablaPersonas from "../components/TablaPersonas.vue";
 
 export default {
-  name: "HomeEscaneo",
+  name: "HomePersonas",
   components: {
     AppDrawer,
-    RegistroPorteria,
+    TablaPersonas,
   },
   data() {
     return {};

@@ -2,8 +2,9 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import vuetify from "./plugins/vuetify";
 import { loadFonts } from "./plugins/webfontloader";
-import HomeRegistro from "./views/HomeRegistro.vue";
+import HomePersonas from "./views/HomePersonas.vue";
 import HomePermiso from "./views/HomePermiso.vue";
+import HomeRegistros from "./views/HomeRegistros.vue";
 
 
 import * as VueRouter from "vue-router";
@@ -11,8 +12,10 @@ import * as VueRouter from "vue-router";
 loadFonts();
 
 const routes = [
-  { path: "/", component: HomeRegistro },
+  { path: "/", component: HomePersonas },
   { path: "/permiso", component: HomePermiso },
+  { path: "/registros", component: HomeRegistros },
+
 ];
 
 const router = VueRouter.createRouter({
