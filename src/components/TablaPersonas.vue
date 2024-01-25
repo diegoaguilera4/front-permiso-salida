@@ -20,7 +20,6 @@
         <v-dialog v-model="dialog" max-width="500px">
           <template v-slot:activator="{ props }">
             <v-btn
-              color="primary"
               variant="tonal"
               dark
               class="mb-2"

@@ -20,6 +20,13 @@
         <v-toolbar-title>Registros</v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
+        <v-btn
+          variant="tonal"
+          append-icon="mdi-update"
+          @click="actualizarRegistros()"
+        >
+          Actualizar
+        </v-btn>
       </v-toolbar>
     </template>
     <!-- Mensaje cuando no hay datos -->
@@ -67,6 +74,9 @@ export default {
     initialize() {
       this.registros = [];
       this.obtenerRegistros();
+    },
+    actualizarRegistros(){
+        this.initialize();
     },
     async obtenerRegistros() {
       try {
