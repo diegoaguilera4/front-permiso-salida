@@ -48,9 +48,9 @@ export default {
       { title: "Rut", key: "rut" },
       { title: "Centro de costo", key: "d_cencos" },
       { title: "Cargo", key: "d_cargo" },
-      { title: "Fecha", key: "fechaHora" },
+      { title: "Fecha y hora", key: "fechaHoraAux" },
       { title: "Tipo", key: "tipo" },
-    ]
+    ],
   }),
 
   computed: {
@@ -75,8 +75,21 @@ export default {
       this.registros = [];
       this.obtenerRegistros();
     },
-    actualizarRegistros(){
-        this.initialize();
+    formatFecha(fechaOriginal) {
+      // Extraer componentes de la fecha y hora
+      var año = fechaOriginal.substring(0, 4);
+      var mes = fechaOriginal.substring(5, 7);
+      var dia = fechaOriginal.substring(8, 10);
+      var horas = fechaOriginal.substring(11, 13);
+      var minutos = fechaOriginal.substring(14, 16);
+      var segundos = fechaOriginal.substring(17, 19);
+
+      // Formatear la fecha en el nuevo formato
+      var fechaFormateada = dia + "-" + mes + "-" + año + " " + horas + ":" + minutos + ":" + segundos;
+      return fechaFormateada;
+    },
+    actualizarRegistros() {
+      this.initialize();
     },
     async obtenerRegistros() {
       try {
@@ -84,7 +97,12 @@ export default {
           "http://localhost:3000/registros/obtenerTodos"
         );
         if (response.data) {
-          this.registros = response.data;
+            this.registros = response.data;
+          //formatear fechas
+            for (var i = 0; i < this.registros.length; i++) {
+                this.registros[i].fechaHoraAux = this.formatFecha(this.registros[i].fechaHora);
+            }
+            
         } else {
           console.error("La respuesta no contiene datos válidos.");
         }
