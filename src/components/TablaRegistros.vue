@@ -95,6 +95,23 @@
       <p>No existen resultados</p>
     </template>
   </v-data-table>
+  <v-dialog v-model="noHayDatos" max-width="500px">
+    <v-card style="border-radius: 20px; padding: 10px">
+      <v-card-title class="text-center"> Error exportando</v-card-title>
+      <v-card-text>
+        <p>
+          No se puede exportar a Excel porque no hay datos que cumplan con los
+          filtros seleccionados.
+        </p>
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn  variant="tonal" @click="noHayDatos = false">
+          Cerrar
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script>
@@ -122,6 +139,7 @@ export default {
     cargoFilter: null,
     tipoFilter: null,
     filtroFecha: new ref(),
+    noHayDatos: false,
   }),
 
   computed: {
@@ -151,8 +169,8 @@ export default {
             (this.tipoFilter === null ||
               this.tipoFilter === "" ||
               item.tipo === this.tipoFilter) &&
-              itemDate >= fecha1 &&
-              itemDate <= fecha2
+            itemDate >= fecha1 &&
+            itemDate <= fecha2
           );
         });
       } else {
@@ -257,29 +275,34 @@ export default {
       this.search = "";
     },
     exportarExcel() {
-      const selectedColumns = [
-        "nombre",
-        "rut",
-        "d_cencos",
-        "d_cargo",
-        "fechaHoraAux",
-        "tipo",
-      ];
-      const filteredData = this.filteredRegistros.map((row) => {
-        return selectedColumns.reduce((acc, key) => {
-          if (key === "fechaHoraAux") {
-            acc["Fecha y hora"] = row[key];
-          } else {
-            acc[key] = row[key];
-          }
-          return acc;
-        }, {});
-      });
+      //verificar que filteredRegistros tenga datos
+      if (this.filteredRegistros.length > 0) {
+        const selectedColumns = [
+          "nombre",
+          "rut",
+          "d_cencos",
+          "d_cargo",
+          "fechaHoraAux",
+          "tipo",
+        ];
+        const filteredData = this.filteredRegistros.map((row) => {
+          return selectedColumns.reduce((acc, key) => {
+            if (key === "fechaHoraAux") {
+              acc["Fecha y hora"] = row[key];
+            } else {
+              acc[key] = row[key];
+            }
+            return acc;
+          }, {});
+        });
 
-      const worksheet = XLSX.utils.json_to_sheet(filteredData);
-      const workbook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(workbook, worksheet, "Registros");
-      XLSX.writeFile(workbook, "Registros.xlsx");
+        const worksheet = XLSX.utils.json_to_sheet(filteredData);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Registros");
+        XLSX.writeFile(workbook, "Registros.xlsx");
+      } else {
+        this.noHayDatos = true;
+      }
     },
   },
 };
