@@ -6,6 +6,7 @@ import HomePersonas from "./views/HomePersonas.vue";
 import HomePermiso from "./views/HomePermiso.vue";
 import HomeRegistros from "./views/HomeRegistros.vue";
 import HomeVisitas from "./views/HomeVisitas.vue";
+import HomeRegistroVisitas from "./views/HomeRegistroVisitas.vue";
 
 import * as VueRouter from "vue-router";
 
@@ -16,6 +17,8 @@ const routes = [
   { path: "/permiso", component: HomePermiso },
   { path: "/registros", component: HomeRegistros },
   { path: "/permisoVisitas", component: HomeVisitas },
+  { path: "/registroVisitas", component: HomeRegistroVisitas },
+
 ];
 
 const router = VueRouter.createRouter({

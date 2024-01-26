@@ -12,7 +12,6 @@ import AppDrawer from "../components/AppDrawer.vue";
 import PedirPermiso from "../components/PedirPermiso.vue";
 
 export default {
-  name: "HomeEscaneo",
   components: {
     AppDrawer,
     PedirPermiso,

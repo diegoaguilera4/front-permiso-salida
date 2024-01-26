@@ -2,19 +2,19 @@
   <v-app>
     <AppDrawer />
     <v-main>
-      <TablaVisitas />
+      <TablaRegistroVisitas />
     </v-main>
   </v-app>
 </template>
 
 <script>
 import AppDrawer from "../components/AppDrawer.vue";
-import TablaVisitas from "../components/TablaVisitas.vue";
+import TablaRegistroVisitas from "../components/TablaRegistroVisitas.vue";
 
 export default {
   components: {
     AppDrawer,
-    TablaVisitas,
+    TablaRegistroVisitas,
   },
   data() {
     return {};

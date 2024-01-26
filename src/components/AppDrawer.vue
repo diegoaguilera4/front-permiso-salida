@@ -8,10 +8,13 @@
           <v-list-item-title>Registros</v-list-item-title>
         </v-list-item>
         <v-list-item @click="$router.push('/permiso')">
-          <v-list-item-title>Permisos</v-list-item-title>
+          <v-list-item-title>Permiso de salida</v-list-item-title>
         </v-list-item>
         <v-list-item @click="$router.push('/permisoVisitas')">
           <v-list-item-title>Permiso visitas</v-list-item-title>
+        </v-list-item>
+        <v-list-item @click="$router.push('/registroVisitas')">
+          <v-list-item-title>Registro de visitas</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>

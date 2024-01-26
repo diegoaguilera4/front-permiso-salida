@@ -12,7 +12,6 @@ import AppDrawer from "../components/AppDrawer.vue";
 import TablaRegistros from "../components/TablaRegistros.vue";
 
 export default {
-  name: "HomePersonas",
   components: {
     AppDrawer,
     TablaRegistros,
