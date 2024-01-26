@@ -29,7 +29,10 @@
               Nueva persona
             </v-btn>
           </template>
-          <v-card class="text-center" style="border-radius: 20px; padding: 15px ">
+          <v-card
+            class="text-center"
+            style="border-radius: 20px; padding: 15px"
+          >
             <v-card-title>
               <span class="text-h5">{{ formTitle }}</span>
             </v-card-title>
@@ -37,31 +40,33 @@
             <v-card-text>
               <v-container>
                 <v-row>
-                  <v-col cols="12" sm="6" md="12">
-                    <v-text-field
-                      v-model="editedItem.nombre"
-                      label="Nombre"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      v-model="editedItem.rut"
-                      label="Rut"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="6">
-                    <v-text-field
-                      v-model="editedItem.d_cencos"
-                      label="Centro de costos"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="8">
-                    <v-text-field
-                      v-model="editedItem.d_cargo"
-                      label="Cargo"
-                    ></v-text-field>
-                  </v-col>
+                  <v-text-field
+                    v-model="editedItem.nombre"
+                    label="Nombre"
+                    :rules="rules"
+                  ></v-text-field>
                 </v-row>
+                <v-row
+                  ><v-text-field
+                    v-model="editedItem.rut"
+                    label="Rut"
+                    :rules="rules"
+                  ></v-text-field
+                ></v-row>
+                <v-row>
+                  <v-text-field
+                    v-model="editedItem.d_cencos"
+                    label="Centro de costos"
+                    :rules="rules"
+                  ></v-text-field>
+                </v-row>
+                <v-row
+                  ><v-text-field
+                    v-model="editedItem.d_cargo"
+                    label="Cargo"
+                    :rules="rules"
+                  ></v-text-field
+                ></v-row>
               </v-container>
             </v-card-text>
 
@@ -77,7 +82,10 @@
           </v-card>
         </v-dialog>
         <v-dialog v-model="dialogDelete" max-width="600px">
-          <v-card class="text-center" style="border-radius: 20px; padding: 15px ">
+          <v-card
+            class="text-center"
+            style="border-radius: 20px; padding: 15px"
+          >
             <v-card-title class="text-h5"
               >¿Estás seguro que deseas eliminar esta persona?</v-card-title
             >
@@ -120,6 +128,13 @@
 import axios from "axios";
 export default {
   data: () => ({
+    rules: [
+      (value) => {
+        if (value) return true;
+
+        return "No puedes dejar este campo vacío.";
+      },
+    ],
     search: "",
     dialog: false,
     dialogDelete: false,
@@ -171,22 +186,77 @@ export default {
 
   methods: {
     initialize() {
-      (this.personas = []), this.obtenerPersonas();
+      this.personas = []; // Inicializar como un array vacío
+      this.obtenerPersonas();
     },
     async obtenerPersonas() {
       try {
         const response = await axios.get(
           "http://localhost:3000/personas/obtenerTodos"
         );
+        // Convertir el objeto a un array
+        const personasArray = Object.values(response.data);
+
         // Verificar si la respuesta tiene datos
-        if (response.data) {
-          this.personas = response.data;
+        if (personasArray.length > 0) {
+          this.personas = personasArray;
         } else {
           console.error("La respuesta no contiene datos válidos.");
           // Puedes lanzar una excepción personalizada o manejarla según tus necesidades.
         }
       } catch (error) {
         console.error("Error al obtener las personas:", error.message);
+        // Puedes mostrar un mensaje al usuario, registrar el error o realizar otras acciones según tus necesidades.
+      }
+    },
+    async crearPersona() {
+      try {
+        let res = await axios.post(
+          "http://localhost:3000/personas/agregar ",
+          this.editedItem
+        );
+        // Verificar si la respuesta tiene datos
+        if(res.status === 201){
+          console.log("Persona creada con éxito");
+        }
+        else{
+          console.error("La respuesta no contiene datos válidos.");
+        }
+      } catch (error) {
+        console.error("Error al crear la persona:", error.message);
+        // Puedes mostrar un mensaje al usuario, registrar el error o realizar otras acciones según tus necesidades.
+      }
+    },
+    async actualizarPersona() {
+      try {
+        let res = await axios.put(
+          `http://localhost:3000/personas/actualizar/${this.editedItem._id}`,
+          this.editedItem
+        );
+        if(res.status === 200){
+          console.log("Persona actualizada con éxito");
+        }
+        else{
+          console.error("La respuesta no contiene datos válidos.");
+        }
+      } catch (error) {
+        console.error("Error al actualizar la persona:", error.message);
+        // Puedes mostrar un mensaje al usuario, registrar el error o realizar otras acciones según tus necesidades.
+      }
+    },
+    async eliminarPersona(){
+      try {
+        let res = await axios.delete(
+          `http://localhost:3000/personas/eliminar/${this.editedItem._id}`
+        );
+        if(res.status === 200){
+          console.log("Persona eliminada con éxito");
+        }
+        else{
+          console.error("La respuesta no contiene datos válidos.");
+        }
+      } catch (error) {
+        console.error("Error al eliminar la persona:", error.message);
         // Puedes mostrar un mensaje al usuario, registrar el error o realizar otras acciones según tus necesidades.
       }
     },
@@ -214,6 +284,7 @@ export default {
 
     deleteItemConfirm() {
       this.personas.splice(this.editedIndex, 1);
+      this.eliminarPersona();
       this.closeDelete();
     },
 
@@ -234,12 +305,24 @@ export default {
     },
 
     save() {
-      if (this.editedIndex > -1) {
-        Object.assign(this.personas[this.editedIndex], this.editedItem);
+      if (
+        this.editedItem.nombre &&
+        this.editedItem.rut &&
+        this.editedItem.d_cencos &&
+        this.editedItem.d_cargo
+      ) {
+        if (this.editedIndex > -1) {
+          this.actualizarPersona();
+          Object.assign(this.personas[this.editedIndex], this.editedItem);
+        } else {
+          this.crearPersona();
+          this.personas.push(this.editedItem);
+        }
+        this.close();
       } else {
-        this.personas.push(this.editedItem);
+        // Puedes mostrar un mensaje de error o manejar la validación según tus necesidades
+        alert("Por favor, completa todos los campos antes de guardar.");
       }
-      this.close();
     },
   },
 };
