@@ -213,6 +213,7 @@ export default {
       this.search = "";
     },
     editItem(item) {
+      
       this.editedIndex = this.visitas.indexOf(item);
       this.editedItem = Object.assign({}, item);
 
@@ -220,6 +221,7 @@ export default {
       this.inicioFecha = this.editedItem.fechaInicio;
       this.terminoFecha = this.editedItem.fechaTermino;
       this.rangoFecha = [this.inicioFecha, this.terminoFecha];
+      
 
       this.dialog = true;
     },
@@ -267,6 +269,12 @@ export default {
           this.editedItem.fechaTermino
         );
         if (this.editedIndex > -1) {
+          this.editedItem.fechaInicioAux = this.formatFechaEspecial(
+            this.editedItem.fechaInicio
+          );
+          this.editedItem.fechaTerminoAux = this.formatFechaEspecial(
+            this.editedItem.fechaTermino
+          );
           this.actualizarVisita();
           Object.assign(this.visitas[this.editedIndex], this.editedItem);
         } else {
