@@ -5,7 +5,7 @@ import { loadFonts } from "./plugins/webfontloader";
 import HomePersonas from "./views/HomePersonas.vue";
 import HomePermiso from "./views/HomePermiso.vue";
 import HomeRegistros from "./views/HomeRegistros.vue";
-
+import HomeVisitas from "./views/HomeVisitas.vue";
 
 import * as VueRouter from "vue-router";
 
@@ -15,7 +15,7 @@ const routes = [
   { path: "/", component: HomePersonas },
   { path: "/permiso", component: HomePermiso },
   { path: "/registros", component: HomeRegistros },
-
+  { path: "/permisoVisitas", component: HomeVisitas },
 ];
 
 const router = VueRouter.createRouter({

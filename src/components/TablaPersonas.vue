@@ -11,7 +11,8 @@
       ></v-text-field>
     </v-col>
   </v-row>
-  <v-data-table :headers="headers" :items="filteredPersonas">
+  <v-data-table :headers="headers" :items="filteredPersonas" items-per-page-text="Personas por página"
+    page-text="{0}-{1} de {2}">
     <template v-slot:top>
       <v-toolbar flat>
         <v-toolbar-title>Personas</v-toolbar-title>

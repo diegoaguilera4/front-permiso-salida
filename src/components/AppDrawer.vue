@@ -10,6 +10,9 @@
         <v-list-item @click="$router.push('/permiso')">
           <v-list-item-title>Permisos</v-list-item-title>
         </v-list-item>
+        <v-list-item @click="$router.push('/permisoVisitas')">
+          <v-list-item-title>Permiso visitas</v-list-item-title>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
     <v-app-bar>
