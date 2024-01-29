@@ -73,10 +73,10 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="green-darken-1" variant="tonal" @click="save">
+              <v-btn color="green-darken-1" variant="tonal" @click="save" append-icon="mdi-account-multiple-plus">
                 Guardar
               </v-btn>
-              <v-btn color="red-darken-1" variant="tonal" @click="close">
+              <v-btn color="red-darken-1" variant="tonal" @click="close" append-icon="mdi-close-circle-outline">
                 Cancelar
               </v-btn>
             </v-card-actions>
@@ -98,13 +98,14 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue-darken-1" variant="tonal" @click="closeDelete"
+              <v-btn color="blue-darken-1" variant="tonal" @click="closeDelete" append-icon="mdi-close-circle-outline"
                 >Cancelar</v-btn
               >
               <v-btn
                 color="red-darken-1"
                 variant="tonal"
                 @click="deleteItemConfirm"
+                append-icon="mdi-delete"
                 >Eliminar</v-btn
               >
               <v-spacer></v-spacer>

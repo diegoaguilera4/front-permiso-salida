@@ -106,7 +106,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn  variant="tonal" @click="noHayDatos = false">
+        <v-btn color="red darken-3" variant="tonal" @click="noHayDatos = false" append-icon="mdi-close-circle-outline">
           Cerrar
         </v-btn>
       </v-card-actions>
