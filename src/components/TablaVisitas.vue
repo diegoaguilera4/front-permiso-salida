@@ -68,7 +68,7 @@
                   ><VueDatePicker
                     v-model="rangoFecha"
                     locale="es"
-                    format="dd/MM/yyyy"
+                    format="dd/MM/yyyy HH:mm"
                     cancelText="CANCELAR"
                     selectText="SELECCIONAR"
                     range

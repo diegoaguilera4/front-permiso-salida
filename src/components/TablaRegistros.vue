@@ -40,7 +40,7 @@
         chips
         label="Tipo"
         :items="getUniqueValues('tipo')"
-        append-inner-icon="mdi-account-tie"
+        append-inner-icon="mdi-door"
         height="20"
       ></v-select>
     </v-col>
